@@ -14,4 +14,4 @@ router.use("/destination", destinationRoute);
 router.use("/pipeline", piplineRoute);
 router.use("/consume", consumeRoute);
 
-export default {};
+export default router
