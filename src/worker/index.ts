@@ -6,7 +6,6 @@ async function worker() {
   setInterval(async () => {
     console.log("start read data");
     const pipeline = await Service.CRUD.findOneRecord("Pipeline", {}, "");
-
     console.log(pipeline);
   },2000);
 }
