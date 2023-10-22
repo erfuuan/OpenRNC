@@ -4,7 +4,7 @@ const ajv = new Ajv();
 const auth: any = {
   type: "object",
   properties: {
-    email: { type: "integer", nullable: false },
+    email: { type: "string", nullable: false },
     password: { type: "string", nullable: false },
   },
   required: ["email", "password"],

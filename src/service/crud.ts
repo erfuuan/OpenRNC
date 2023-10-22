@@ -1,5 +1,5 @@
 import Model from "../model/index";
-import moment from "jalali-moment";
+// import moment from "jalali-moment";
 
 export default {
   async create(schema: string, data: any) {
@@ -39,7 +39,6 @@ export default {
   async findOneRecord(schema: string, condition: any, populate: any) {
     try {
       const dataSchema = Model[schema];
-      console.log(dataSchema)
       const data = await dataSchema
       .findOne(condition)
       .populate(populate)
@@ -92,12 +91,12 @@ export default {
         .sort(sort)
         .select(select)
         .lean();
-      data.createdAt = moment(data.createdAt, "X").format(
-        "jYYYY/jMM/jDD HH:mm"
-      );
-      data.updatedAt = moment(data.updatedAt, "X").format(
-        "jYYYY/jMM/jDD HH:mm"
-      );
+      // data.createdAt = moment(data.createdAt, "X").format(
+      //   "jYYYY/jMM/jDD HH:mm"
+      // );
+      // data.updatedAt = moment(data.updatedAt, "X").format(
+      //   "jYYYY/jMM/jDD HH:mm"
+      // );
       return data;
     } catch (err) {
       console.log(err);

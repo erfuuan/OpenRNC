@@ -5,6 +5,7 @@ import chalk from 'chalk';
 import { connectWithRetry } from './connection/db.connection';
 // import { redisConnectRetry } from './connection/redis.connection'
 import app from './app';
+import worker from './worker/index'
 // const port = normalizePort(process.env.PORT || '3000');
 const port: string = process.env.PORT || '3000';
 app.set('port', port);
@@ -22,6 +23,8 @@ async function bootstrap(): Promise<any> {
     server.close();
   }
 }
+
+worker()
 
 bootstrap();
 

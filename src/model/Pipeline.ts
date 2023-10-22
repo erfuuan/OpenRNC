@@ -1,13 +1,14 @@
 import mongoose from "mongoose";
 import moment from "jalali-moment";
 
-const sourceSchema = new mongoose.Schema(
+const pipeLineSchema = new mongoose.Schema(
   {
     title: { type: String, required: true },
-    platform: { type: String, required: true },
     description: String,
-    sourceToken: { type: String, required: true },
-    sourceLicence: { type: String, required: true },
+    sourceId: { type: mongoose.Types.ObjectId, ref: "Source", required: true },
+    destinationIds: [
+      { type: mongoose.Types.ObjectId, ref: "destination", required: true },
+    ],
     createdAt: {
       type: Number,
       required: true,
@@ -20,5 +21,5 @@ const sourceSchema = new mongoose.Schema(
     versionKey: false,
   }
 );
-const Source = mongoose.model("Source", sourceSchema);
-export default Source;
+const Pipeline = mongoose.model("Pipeline", pipeLineSchema);
+export default Pipeline;
