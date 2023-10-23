@@ -9,10 +9,15 @@ const create = joi.object().keys({
 
 const update = joi.object().keys({
   id: joi.string().required(),
-  title: joi.string().required(),
-  platform: joi.string().required(),
-  description: joi.string(),
-  credential: joi.object().required(),
+  destination: joi
+    .object()
+    .keys({
+      title: joi.string().required(),
+      platform: joi.string().required(),
+      description: joi.string(),
+      credential: joi.object().required(),
+    })
+    .required(),
 });
 
 const oneRecord = joi.object().keys({
