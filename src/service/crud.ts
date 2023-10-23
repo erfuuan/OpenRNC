@@ -94,9 +94,7 @@ export default {
       // data.createdAt = moment(data.createdAt, "X").format(
       //   "jYYYY/jMM/jDD HH:mm"
       // );
-      // data.updatedAt = moment(data.updatedAt, "X").format(
-      //   "jYYYY/jMM/jDD HH:mm"
-      // );
+ 
       return data;
     } catch (err) {
       console.log(err);

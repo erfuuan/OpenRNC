@@ -15,7 +15,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
-app.use("/api/v1", mainRouter);
+app.use("/api/v1",mainRouter);
 
 app.get("/health", (req: Request, res: Response) => {
   return res.send("ok");

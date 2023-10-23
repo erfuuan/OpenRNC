@@ -7,7 +7,7 @@ import { connectWithRetry } from './connection/db.connection';
 import app from './app';
 import worker from './worker/index'
 // const port = normalizePort(process.env.PORT || '3000');
-const port: string = process.env.PORT || '3000';
+const port: string = process.env.PORT || '3001';
 app.set('port', port);
 let server: any;
 async function bootstrap(): Promise<any> {
@@ -24,7 +24,7 @@ async function bootstrap(): Promise<any> {
   }
 }
 
-worker()
+// worker()
 
 bootstrap();
 
@@ -51,9 +51,9 @@ process.on('SIGINT', () => {
 //     process.exit(0);
 //   });
 });
-process.on('unhandledRejection', (err) => {
+process.on('unhandledRejection', (err:any) => {
   console.log('UNHANDLED REJECTION! 💥');
-  // console.lof({ message: err.message, stack: err.stack });
+  console.log({ message: err.message, stack: err.stack });
 });
 // Handle uncaughtException errors globally
 process.on('uncaughtException', (err) => {

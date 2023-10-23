@@ -4,9 +4,17 @@ import moment from "jalali-moment";
 const destinationSchema = new mongoose.Schema(
   {
     title: { type: String, required: true },
-    platform: { type: String, required: true },
+    platform: {
+      type: String,
+      required: true,
+      enum: ["redis", "kafka", "webhook", "mysql"],
+    },
     description: String,
-    block: { type: Boolean, default: false },
+    credential: {
+      address: String,
+      port: String,
+      topic: String,
+    },
     createdAt: {
       type: Number,
       required: true,
