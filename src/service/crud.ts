@@ -15,24 +15,16 @@ export default {
   async findById(schema: string, dataId: any, populate: any) {
     try {
       const dataSchema = Model[schema];
-      // const data = await dataSchema.findById(dataId)
-      const data = await dataSchema
-        .findOne({ _id: dataId })
-
-        .populate(populate);
-      // .lean();
+      const data = await dataSchema.findById(dataId).lean()
+      // const data = await dataSchema.findOne({ _id: dataId }).populate(populate).lean();
       // data.createdAt = moment(data.createdAt, "X").format("jYYYY/jMM/jDD HH:mm")
       // data.updatedAt = moment(data.updatedAt, "X").format("jYYYY/jMM/jDD HH:mm")
-      if (data) {
         return data;
-      } else {
-        return undefined;
-      }
     } catch (err) {
       console.log(err);
-      console.log("err from @getOne crudService zone");
-      // throw err
-      return undefined;
+      console.log("err from @findById crudService zone");
+      throw err
+      // return undefined;
     }
   },
 
@@ -48,7 +40,7 @@ export default {
       return data;
     } catch (err) {
       console.log(err);
-      console.log("err from @getOne crudService zone");
+      console.log("err from @findOneRecord crudService zone 1");
       throw err;
     }
   },

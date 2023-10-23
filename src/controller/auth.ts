@@ -5,24 +5,18 @@ import responseBuilder from "../library/responseBuilder";
 import CRYPTOGRAPHY from "./../library/cryptography";
 import Service from "../service/index";
 import validation from "../validator/index";
-import Ajv, { JSONSchemaType } from "ajv";
-const ajv = new Ajv();
+import Joi from "joi";
 
 export default {
   async signup(req: Request, res: Response) {
+    const result = validation.auth.validate(req.body);
+    if (result.error) {
+      return responseBuilder.badRequest(res, req.body, result.error.message);
+    }
     try {
       //?=======
-      const validate = ajv.compile(validation.auth);
-      const result = validate(req.body);
-      if (!result) {
-        return responseBuilder.badRequest(
-          res,
-          req.body,
-          ajv.errorsText(validate.errors)
-        );
-      }
+      const data = await Joi.attempt(result.value, validation.auth);
       //?=======
-      const data: any = req.body;
       const userExist: any = await Service.CRUD.findOneRecord(
         "User",
         {
@@ -31,7 +25,6 @@ export default {
         },
         []
       );
-      console.log(userExist);
       if (userExist) {
         return responseBuilder.conflict(
           res,
@@ -63,18 +56,13 @@ export default {
   },
 
   async login(req: Request, res: Response) {
-    const validate = ajv.compile(validation.auth);
-    const result = validate(req.body);
-    if (!result) {
-      return responseBuilder.badRequest(
-        res,
-        req.body,
-        ajv.errorsText(validate.errors)
-      );
+    const result = validation.auth.validate(req.body);
+    if (result.error) {
+      return responseBuilder.badRequest(res, req.body, result.error.message);
     }
     try {
-      // const data = await Joi.attempt(result.value, Schema.auth.login);
-      const data = req.body;
+      //?=======
+      const data = await Joi.attempt(result.value, validation.auth);
       const user = await Service.CRUD.findOneRecord(
         "User",
         {

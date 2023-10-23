@@ -5,8 +5,7 @@ import responseBuilder from "../library/responseBuilder";
 import CRYPTOGRAPHY from "./../library/cryptography";
 import Service from "../service/index";
 import validation from "../validator/index";
-import Ajv, { JSONSchemaType } from "ajv";
-const ajv = new Ajv();
+
 
 export default {
   async create(req: Request, res: Response) {

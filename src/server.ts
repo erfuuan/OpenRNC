@@ -7,16 +7,17 @@ import { connectWithRetry } from './connection/db.connection';
 import app from './app';
 import worker from './worker/index'
 // const port = normalizePort(process.env.PORT || '3000');
-const port: string = process.env.PORT || '3001';
+const port: string = process.env.PORT || '3000';
 app.set('port', port);
 let server: any;
-async function bootstrap(): Promise<any> {
+async function createServer(): Promise<any> {
   // debugger;
   const DBconnectionSuccessfully = await connectWithRetry();
   if (DBconnectionSuccessfully.statusCode == 200) {
     server = http.createServer(app);
     return server.listen(port, () => {
-        console.log('✔ [success] server listen to', port, '💥 \n \n \n');
+      console.log(new Date())
+        console.log(`✔ [success] server listen to ${port}💥 ${new Date()} \n \n \n`);
         //   console.log(chalk.white.green.bold('✔ [success] server listen to', port, '💥'), '\n \n \n');
     });
   } else {
@@ -24,9 +25,24 @@ async function bootstrap(): Promise<any> {
   }
 }
 
-// worker()
+worker()
+createServer()
+// bootstrap();
 
-bootstrap();
+
+
+// async function bootstrap () {
+  
+// }
+
+
+
+
+
+
+
+
+
 
 mongoose.connection.on('connecting', function () {
 //   console.log(chalk.blue('trying to establish a connection to mongo'));
@@ -38,7 +54,7 @@ mongoose.connection.on('connected', function () {
 mongoose.connection.on('disconnected', async (err) => {
 //   console.log(chalk.red("mongoose 'disconnected !!  server closed "));
   server.close();
-  return setTimeout(bootstrap, 4000);
+  return setTimeout(createServer, 4000);
   // return setTimeout(connectWithRetry, 4000);
 });
 // mongoose.connection.on('reconnected', function () {

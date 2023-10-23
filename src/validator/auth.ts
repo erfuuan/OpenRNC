@@ -1,15 +1,7 @@
-import Ajv, { JSONSchemaType } from "ajv";
-const ajv = new Ajv();
+import joi from "joi";
 
-const auth: any = {
-  type: "object",
-  properties: {
-    email: { type: "string", nullable: false },
-    password: { type: "string", nullable: false },
-  },
-  required: ["email", "password"],
-  additionalProperties: false,
-};
-
-
-export default auth
+const schema = joi.object().keys({
+  email: joi.string().required(),
+  password: joi.string().required(),
+});
+export default schema;
