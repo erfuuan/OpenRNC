@@ -12,7 +12,7 @@ export default {
   },
 
   tokenGenerator() {
-    return faker.random.alpha(16);
+    return faker.string.alpha(50);
   },
 
   //   verifyJwtToken(token: string) {

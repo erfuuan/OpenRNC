@@ -14,6 +14,7 @@ const destinationSchema = new mongoose.Schema(
       address: String,
       port: String,
       topic: String,
+      // required:true
     },
     createdAt: {
       type: Number,

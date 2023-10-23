@@ -25,7 +25,7 @@ async function createServer(): Promise<any> {
   }
 }
 
-worker()
+// worker()
 createServer()
 // bootstrap();
 

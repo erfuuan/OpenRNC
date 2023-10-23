@@ -15,15 +15,15 @@ export default {
   async findById(schema: string, dataId: any, populate: any) {
     try {
       const dataSchema = Model[schema];
-      const data = await dataSchema.findById(dataId).lean()
+      const data = await dataSchema.findById(dataId).lean();
       // const data = await dataSchema.findOne({ _id: dataId }).populate(populate).lean();
       // data.createdAt = moment(data.createdAt, "X").format("jYYYY/jMM/jDD HH:mm")
       // data.updatedAt = moment(data.updatedAt, "X").format("jYYYY/jMM/jDD HH:mm")
-        return data;
+      return data;
     } catch (err) {
       console.log(err);
       console.log("err from @findById crudService zone");
-      throw err
+      throw err;
       // return undefined;
     }
   },
@@ -32,9 +32,9 @@ export default {
     try {
       const dataSchema = Model[schema];
       const data = await dataSchema
-      .findOne(condition)
-      .populate(populate)
-      .lean();
+        .findOne(condition)
+        .populate(populate)
+        .lean();
       // data.createdAt = moment(data.createdAt, "X").format("jYYYY/jMM/jDD HH:mm")
       // data.updatedAt = moment(data.updatedAt, "X").format("jYYYY/jMM/jDD HH:mm")
       return data;
@@ -86,7 +86,7 @@ export default {
       // data.createdAt = moment(data.createdAt, "X").format(
       //   "jYYYY/jMM/jDD HH:mm"
       // );
- 
+
       return data;
     } catch (err) {
       console.log(err);
@@ -105,7 +105,12 @@ export default {
     try {
       const dataSchema = Model[schema];
       const updatedData = await dataSchema
-        .findByIdAndUpdate(dataId, data, { new: true })
+        .findByIdAndUpdate(
+          dataId,
+          data,
+          // { new: true }
+          { returnOriginal: false }
+        )
         .populate(populate)
         .select(select)
         .lean();
@@ -119,10 +124,22 @@ export default {
     }
   },
 
-  async delete(schema: string, dataId: any, data: any) {
+  async softDelete(schema: string, dataId: any, data: any) {
     try {
       const dataSchema = Model[schema];
       await dataSchema.findByIdAndUpdate(dataId, data);
+      return true;
+    } catch (err) {
+      console.log(err);
+      console.log("err from @delete crudService zone");
+      throw err;
+    }
+  },
+
+  async hardDelete(schema: string, dataId: any) {
+    try {
+      const dataSchema = Model[schema];
+      await dataSchema.deleteOne({ _id: dataId });
       return true;
     } catch (err) {
       console.log(err);
