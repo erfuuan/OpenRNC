@@ -1,0 +1,9 @@
+# Ignore artifacts:
+**/node_modules
+*/node_modules
+/node_modules
+node_modules
+///home/erfuuan/self_project/OpenRNC/node_modules
+node_modules/
+package.json
+/node_modules/

@@ -20,16 +20,16 @@ OpenRNC is an open-source Customer Data Platform (CDP) built with Node.js that p
 
 1. Clone the OpenRNC repository:
 
-    ```shell
-    git clone https://github.com/yourusername/OpenRNC.git
-    cd OpenRNC
-    ```
+   ```shell
+   git clone https://github.com/yourusername/OpenRNC.git
+   cd OpenRNC
+   ```
 
 2. Install the required dependencies:
 
-    ```shell
-    npm install
-    ```
+   ```shell
+   npm install
+   ```
 
 ### Configuration
 
@@ -41,3 +41,4 @@ Start the OpenRNC server:
 
 ```shell
 npm start
+```

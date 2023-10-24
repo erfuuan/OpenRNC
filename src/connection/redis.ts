@@ -10,8 +10,7 @@ redis.on('connect', () => {
 
 // Log Redis errors
 redis.on('error', (error) => {
-  // console.log(chalk.red(`Redis Client error ${error}`));
-  console.log(`Redis Client error ${error}`);
+  console.log(chalk.red(`Redis Client error ${error}`));
 });
 
 export default redis;

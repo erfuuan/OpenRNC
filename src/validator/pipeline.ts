@@ -1,10 +1,10 @@
-import joi from "joi";
+import joi from 'joi';
 
 const create = joi.object().keys({
   title: joi.string().required(),
   description: joi.string(),
   sourceId: joi.string().required(),
-  destinationIds: joi.array().required(),
+  destinationIds: joi.array().items(joi.string()).required(),
 });
 
 const update = joi.object().keys({

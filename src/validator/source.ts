@@ -1,4 +1,4 @@
-import joi from "joi";
+import joi from 'joi';
 
 const create = joi.object().keys({
   title: joi.string().required(),

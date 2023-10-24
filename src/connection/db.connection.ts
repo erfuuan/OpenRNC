@@ -1,3 +1,4 @@
+
 import mongoose from 'mongoose';
 
 const connectWithRetry = async () => {
@@ -10,3 +11,4 @@ const connectWithRetry = async () => {
   return { statusCode: 200, message: 'DB connected' };
 };
 export { connectWithRetry };
+

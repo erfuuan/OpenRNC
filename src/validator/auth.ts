@@ -1,4 +1,4 @@
-import joi from "joi";
+import joi from 'joi';
 
 const schema = joi.object().keys({
   email: joi.string().required(),

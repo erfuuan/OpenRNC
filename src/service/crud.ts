@@ -1,4 +1,4 @@
-import Model from "../model/index";
+import Model from '../model/index';
 // import moment from "jalali-moment";
 
 export default {
@@ -7,7 +7,7 @@ export default {
       const newData = new Model[schema](data);
       return await newData.save();
     } catch (err) {
-      console.log("err from @create crudService zone");
+      console.log('err from @create crudService zone');
       console.log(err);
       throw err;
     }
@@ -22,7 +22,7 @@ export default {
       return data;
     } catch (err) {
       console.log(err);
-      console.log("err from @findById crudService zone");
+      console.log('err from @findById crudService zone');
       throw err;
       // return undefined;
     }
@@ -31,58 +31,33 @@ export default {
   async findOneRecord(schema: string, condition: any, populate: any) {
     try {
       const dataSchema = Model[schema];
-      const data = await dataSchema
-        .findOne(condition)
-        .populate(populate)
-        .lean();
+      const data = await dataSchema.findOne(condition).populate(populate).lean();
       // data.createdAt = moment(data.createdAt, "X").format("jYYYY/jMM/jDD HH:mm")
       // data.updatedAt = moment(data.updatedAt, "X").format("jYYYY/jMM/jDD HH:mm")
       return data;
     } catch (err) {
       console.log(err);
-      console.log("err from @findOneRecord crudService zone 1");
+      console.log('err from @findOneRecord crudService zone 1');
       throw err;
     }
   },
 
-  async getAll(
-    schema: string,
-    condition: any,
-    populate: any,
-    sort: any,
-    select: any
-  ) {
+  async getAll(schema: string, condition: any, populate: any, sort: any, select: any) {
     try {
       const dataSchema = Model[schema];
-      const posts = await dataSchema
-        .find(condition)
-        .populate(populate)
-        .sort(sort)
-        .select(select)
-        .lean();
+      const posts = await dataSchema.find(condition).populate(populate).sort(sort).select(select).lean();
       return posts;
     } catch (err) {
       console.log(err);
-      console.log("err from @getAll crudService zone");
+      console.log('err from @getAll crudService zone');
       throw err;
     }
   },
 
-  async find(
-    schema: string,
-    condition: any,
-    populate: any,
-    sort: any,
-    select: any
-  ) {
+  async find(schema: string, condition: any, populate: any, sort: any, select: any) {
     try {
       const dataSchema = Model[schema];
-      const data = await dataSchema
-        .find(condition)
-        .populate(populate)
-        .sort(sort)
-        .select(select)
-        .lean();
+      const data = await dataSchema.find(condition).populate(populate).sort(sort).select(select).lean();
       // data.createdAt = moment(data.createdAt, "X").format(
       //   "jYYYY/jMM/jDD HH:mm"
       // );
@@ -90,18 +65,12 @@ export default {
       return data;
     } catch (err) {
       console.log(err);
-      console.log("err from @find  crudService zone");
+      console.log('err from @find  crudService zone');
       throw err;
     }
   },
 
-  async updateById(
-    schema: string,
-    data: any,
-    dataId: any,
-    populate: any,
-    select: any
-  ) {
+  async updateById(schema: string, data: any, dataId: any, populate: any, select: any) {
     try {
       const dataSchema = Model[schema];
       const updatedData = await dataSchema
@@ -119,7 +88,7 @@ export default {
       return updatedData;
     } catch (err) {
       console.log(err);
-      console.log("err from @update crudService zone");
+      console.log('err from @update crudService zone');
       throw err;
     }
   },
@@ -131,7 +100,7 @@ export default {
       return true;
     } catch (err) {
       console.log(err);
-      console.log("err from @delete crudService zone");
+      console.log('err from @delete crudService zone');
       throw err;
     }
   },
@@ -143,7 +112,7 @@ export default {
       return true;
     } catch (err) {
       console.log(err);
-      console.log("err from @delete crudService zone");
+      console.log('err from @delete crudService zone');
       throw err;
     }
   },

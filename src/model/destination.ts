@@ -1,5 +1,5 @@
-import mongoose from "mongoose";
-import moment from "jalali-moment";
+import mongoose from 'mongoose';
+import moment from 'jalali-moment';
 
 const destinationSchema = new mongoose.Schema(
   {
@@ -7,19 +7,33 @@ const destinationSchema = new mongoose.Schema(
     platform: {
       type: String,
       required: true,
-      enum: ["redis", "kafka", "webhook", "mysql"],
+      enum: ['redis', 'kafka', 'webHook', 'mysql','mongo'],
     },
     description: String,
-    credential: {
-      address: String,
-      port: String,
-      topic: String,
-      // required:true
-    },
+
+    credential: Object,
+
+
+
+
+
+
+    // credential: {
+    //   address: String,
+    //   port: String,
+    //   password:String,
+    //   dbName:String,
+    //   topic: String,
+    //   headers: Object,
+    //   params: Object,
+    //   payload: Object,
+    //   method:String
+    //   // required:true
+    // },
     createdAt: {
       type: Number,
       required: true,
-      default: moment(new Date()).format("X"),
+      default: moment(new Date()).format('X'),
     },
     updatedAt: Number,
     deletedAt: { type: Boolean, default: false },
@@ -28,5 +42,5 @@ const destinationSchema = new mongoose.Schema(
     versionKey: false,
   }
 );
-const Destination = mongoose.model("Destination", destinationSchema);
+const Destination = mongoose.model('Destination', destinationSchema);
 export default Destination;

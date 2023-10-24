@@ -1,5 +1,5 @@
-import mongoose from "mongoose";
-import moment from "jalali-moment";
+import mongoose from 'mongoose';
+import moment from 'jalali-moment';
 
 const sourceSchema = new mongoose.Schema(
   {
@@ -11,7 +11,7 @@ const sourceSchema = new mongoose.Schema(
     createdAt: {
       type: Number,
       required: true,
-      default: moment(new Date()).format("X"),
+      default: moment(new Date()).format('X'),
     },
     updatedAt: Number,
     deletedAt: { type: Boolean, default: false },
@@ -20,5 +20,5 @@ const sourceSchema = new mongoose.Schema(
     versionKey: false,
   }
 );
-const Source = mongoose.model("Source", sourceSchema);
+const Source = mongoose.model('Source', sourceSchema);
 export default Source;

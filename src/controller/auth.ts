@@ -1,11 +1,10 @@
-import { Request, Response } from "express";
-import responseBuilder from "../library/responseBuilder";
-// import * as chalk from 'chalk'
-// import  chalk from 'chalk'
-import CRYPTOGRAPHY from "./../library/cryptography";
-import Service from "../service/index";
-import validation from "../validator/index";
-import Joi from "joi";
+import { Request, Response } from 'express';
+import responseBuilder from '../library/responseBuilder';
+import  chalk from 'chalk'
+import CRYPTOGRAPHY from './../library/cryptography';
+import Service from '../service/index';
+import validation from '../validator/index';
+import Joi from 'joi';
 
 export default {
   async signup(req: Request, res: Response) {
@@ -14,29 +13,15 @@ export default {
       return responseBuilder.badRequest(res, req.body, result.error.message);
     }
     try {
-      //?=======
       const data = await Joi.attempt(result.value, validation.auth);
-      //?=======
-      const userExist: any = await Service.CRUD.findOneRecord(
-        "User",
-        {
-          email: data.email,
-          role: "user",
-        },
-        []
-      );
+      const userExist: any = await Service.CRUD.findOneRecord('User', { email: data.email, role: 'user' }, []);
       if (userExist) {
-        return responseBuilder.conflict(
-          res,
-          "",
-          ".کاربری با این ایمیل وارده در سیستم وجود دارد "
-        );
+        return responseBuilder.conflict(res, '', '.کاربری با این ایمیل وارده در سیستم وجود دارد ');
       }
-
-      const user = await Service.CRUD.create("User", {
+      const user = await Service.CRUD.create('User', {
         password: CRYPTOGRAPHY.md5(data.password),
         email: data.email,
-        role: "user",
+        role: 'user',
       });
       return responseBuilder.success(
         res,
@@ -46,11 +31,11 @@ export default {
           username: user.username,
           role: user.role,
         },
-        "حساب کاربری شما با موفقیت ایجاد شد"
+        'حساب کاربری شما با موفقیت ایجاد شد'
       );
     } catch (err) {
-      console.log("✖ err from catch of controller : ", err);
-      //   console.log(chalk.red("✖ err from catch of controller : "),err );
+      console.log('✖ err from catch of controller : ', err);
+        console.log(chalk.red("✖ err from catch of controller : "),err );
       return responseBuilder.internalErr(res);
     }
   },
@@ -61,35 +46,27 @@ export default {
       return responseBuilder.badRequest(res, req.body, result.error.message);
     }
     try {
-      //?=======
       const data = await Joi.attempt(result.value, validation.auth);
       const user = await Service.CRUD.findOneRecord(
-        "User",
+        'User',
         {
           email: data.email,
           password: CRYPTOGRAPHY.md5(data.password),
-          role: "user",
+          role: 'user',
         },
         []
       );
       if (!user) {
-        return responseBuilder.notFound(
-          res,
-          "",
-          "کاربری با این مشخصات در سبستم وجود ندارد"
-        );
+        return responseBuilder.notFound(res, '', 'کاربری با این مشخصات در سبستم وجود ندارد');
       }
-      await Service.REDIS.put(
-        user._id,
-        CRYPTOGRAPHY.base64.encode(JSON.stringify(user))
-      );
+      await Service.REDIS.put(user._id, CRYPTOGRAPHY.base64.encode(JSON.stringify(user)));
       const responseData = {
         token: CRYPTOGRAPHY.generateAccessToken({ username: user._id }),
         role: user.role,
       };
       return responseBuilder.success(res, responseData);
     } catch (err) {
-      console.log("✖ err from catch of controller : ", err);
+      console.log('✖ err from catch of controller : ', err);
       return responseBuilder.internalErr(res);
     }
   },

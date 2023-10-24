@@ -1,8 +1,8 @@
-import jwt from "jsonwebtoken";
-import md5 from "md5";
-import appConfig from "../config/application";
-import { nanoid } from 'nanoid'
-import { faker } from "@faker-js/faker";
+import jwt from 'jsonwebtoken';
+import md5 from 'md5';
+import appConfig from '../config/application';
+import { nanoid } from 'nanoid';
+import { faker } from '@faker-js/faker';
 
 export default {
   generateAccessToken(username: any) {
@@ -47,11 +47,11 @@ export default {
   base64: {
     encode: (data: string) => {
       let buff = Buffer.from(data);
-      return buff.toString("base64");
+      return buff.toString('base64');
     },
     decode: (data: string) => {
-      let buff = Buffer.from(data, "base64");
-      return buff.toString("utf8");
+      let buff = Buffer.from(data, 'base64');
+      return buff.toString('utf8');
     },
   },
   md5(data: any) {

@@ -1,25 +1,25 @@
-import { Request, Response } from "express";
-import responseBuilder from "../library/responseBuilder";
-// import * as chalk from 'chalk'
-// import  chalk from 'chalk'
-import CRYPTOGRAPHY from "./../library/cryptography";
-import Service from "../service/index";
-import validation from "../validator/index";
-import Ajv, { JSONSchemaType } from "ajv";
-const ajv = new Ajv();
+import { Request, Response } from 'express';
+import responseBuilder from '../library/responseBuilder';
+import chalk from 'chalk';
+import CRYPTOGRAPHY from './../library/cryptography';
+import Service from '../service/index';
+import validation from '../validator/index';
+import Joi from 'joi'
+
 export default {
   async create(req: Request, res: Response) {
-    try {
-      let data = req.body;
-      const newPipeline = await Service.CRUD.create("Pipeline", data);
-      return responseBuilder.success(res, newPipeline, "");
+    const result = validation.pipeline.create.validate(req.body);
+    if (result.error) {
+      return responseBuilder.badRequest(res, req.body, result.error.message);
+    }
+      try {
+        let data = await Joi.attempt(result.value, validation.pipeline.create);
+      const newPipeline = await Service.CRUD.create('Pipeline', data);
+      return responseBuilder.success(res, newPipeline, '');
     } catch (err) {
-      console.log("✖ err from catch of controller : ", err);
-      
-      //   console.log(chalk.red("✖ err from catch of controller : "),err );
+      console.log(chalk.red('✖ err from catch of controller : '), err);
       return responseBuilder.internalErr(res);
     }
-
   },
   async getAll(req: Request, res: Response) {},
   async getOne(req: Request, res: Response) {},
