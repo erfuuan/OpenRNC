@@ -1,5 +1,10 @@
 # OpenRNC (Realtime Node.js CDP)
 
+<img src="logo.png"
+     alt="Markdown Monster icon"
+     style="float: left; margin-right: 10px;" />
+     <br> <br> <br> <br><br>
+
 OpenRNC is an open-source Customer Data Platform (CDP) built with Node.js that provides real-time data processing and analytics capabilities. It is designed to help organizations collect, analyze, and utilize customer data in real-time to make informed decisions and improve user experiences.
 
 ## Features
