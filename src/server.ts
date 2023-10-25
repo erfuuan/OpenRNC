@@ -26,18 +26,56 @@ async function createServer(): Promise<any> {
     server.close();
   }
 }
+
+// async function allWorker(){
+//   await worker()
+//   await worker()
+//   await worker()
+//   await worker()
+//   await worker()
+//   await worker()
+//   await worker()
+//   await worker()
+//   await worker()
+//   await worker()
+// }
 worker()
+
 createServer();
 // bootstrap();
+
 // setup.createSource()
 // setup.createDestination()
 // setup.createPipleine()
-// setup.createConsumeData()
+
+  // setup.createConsumeData()
+  // setup.createConsumeData()
+  // setup.createConsumeData()
+  // setup.createConsumeData()
+  // setup.createConsumeData()
+  // setup.createConsumeData()
+  // setup.createConsumeData()
+  // setup.createConsumeData()
+  // setup.createConsumeData()
+  // setup.createConsumeData()
+  // setup.createConsumeData()
+  // setup.createConsumeData()
+  // setup.createConsumeData()
+  // setup.createConsumeData()
+  // setup.createConsumeData()
+  // setup.createConsumeData()
+  // setup.createConsumeData()
+  // setup.createConsumeData()
+  // setup.createConsumeData()
+  // setup.createConsumeData()
+  // setup.createConsumeData()
+  // setup.createConsumeData()
+  // setup.createConsumeData()
+  // setup.createConsumeData()
 
 // async function bootstrap () {
 
 // }
-
 mongoose.connection.on('connecting', function () {
     console.log(chalk.blue('trying to establish a connection to mongo'));
 });
@@ -55,20 +93,24 @@ mongoose.connection.on('disconnected', async (err) => {
 //   console.log('++Reconnected to MongoDB++');
 // });
 
-process.on('SIGINT', () => {
-  //   mongoose.connection.close(() => {
-  //     console.log('Force to close the MongoDB conection');
-  //     process.exit(0);
-  //   });
-});
+// process.on('SIGINT', () => {
+//   mongoose.connection.close(() => {
+//     console.log('Force to close the MongoDB conection');
+//     process.exit(0);
+//   });
+// });
 process.on('unhandledRejection', (err: any) => {
   console.log('UNHANDLED REJECTION! 💥');
-  console.log({ message: err.message, stack: err.stack });
+  // console.log({ message: err.message, stack: err.stack });
+  server.close()
+  return createServer()
 });
+
 // Handle uncaughtException errors globally
 process.on('uncaughtException', (err) => {
-  console.log('Uncaught Exception!  Shutting down...');
   console.log({ message: err.message, stack: err.stack });
+  console.log('Uncaught Exception!  Shutting down...');
   // Shutdown application
+  // return createServer()
   process.exit(1);
 });

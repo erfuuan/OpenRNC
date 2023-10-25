@@ -11,25 +11,23 @@ const destinationSchema = new mongoose.Schema(
     },
     description: String,
 
-    credential: Object,
+    // credential: Object,
 
 
-
-
-
-
-    // credential: {
-    //   address: String,
-    //   port: String,
-    //   password:String,
-    //   dbName:String,
-    //   topic: String,
-    //   headers: Object,
-    //   params: Object,
-    //   payload: Object,
-    //   method:String
-    //   // required:true
-    // },
+    credential: {
+      address: String,
+      port: String,
+      password:String,
+      dbName:String,
+      topic: String,
+      url:String,
+      headers: Object,
+      params: Object,
+      payload: Object,
+      method:String
+      // required:true
+    },
+    
     createdAt: {
       type: Number,
       required: true,
