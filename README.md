@@ -22,6 +22,8 @@ OpenRNC is an open-source Customer Data Platform (CDP) built with Node.js that p
 
 - **Open-Source and Customizable**: OpenRNC is open-source, giving you the freedom to customize it to your needs.
 
+ ![TreansferData](1.gif)
+
 ## Getting Started
 
 ### Installation
