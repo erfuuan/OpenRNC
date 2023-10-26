@@ -3,14 +3,15 @@ import moment from 'jalali-moment';
 
 const workspaceSchema = new mongoose.Schema(
   {
-    title: { type: String, required: true },
+    name: { type: String, required: true },
     description: String,
-    destinationIds: [{ type: String, required: true }],
+    token: { type: String, required: true },
     createdAt: {
       type: Number,
       required: true,
       default: moment(new Date()).format('X'),
     },
+    ownerId:{type: String,required:true},
     updatedAt: Number,
     deletedAt: { type: Boolean, default: false },
   },

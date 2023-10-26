@@ -20,10 +20,8 @@ export default {
       if (!sourceExist) {
         return responseBuilder.notFound(res, '', 'source is not exist !');
       }
-      console.log( data.destinationIds)
-      const destinationExist = await Service.CRUD.find('Destination', { _id: { $all: data.destinationIds } }, []);
-      console.log(destinationExist)
-      if (!destinationExist.length) {
+      const destinationExist = await Service.CRUD.find('Destination', { _id: { $in: data.destinationIds } }, []);
+      if (!destinationExist.length || destinationExist.length != data.destinationIds.length) {
         return responseBuilder.notFound(res, '', 'destination is not exist !');
       }
       const newPipeline = await Service.CRUD.create('Pipeline', data);

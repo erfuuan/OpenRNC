@@ -87,6 +87,6 @@ process.on('uncaughtException', (err) => {
   console.log({ message: err.message, stack: err.stack });
   console.log('Uncaught Exception!  Shutting down...');
   // Shutdown application
-  // return createServer()
+  return createServer()
   process.exit(1);
 });

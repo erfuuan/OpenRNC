@@ -15,6 +15,10 @@ export default {
     return faker.string.alpha(50);
   },
 
+  randomWords() {
+    return faker.string.nanoid({ min: 5, max: 10 }).replace('_', '');
+  },
+
   //   verifyJwtToken(token: string) {
   //     // return jwt.verify(token:string, appConfig.jwt.secret)
   //     jwt.verify(token, appConfig.jwt.secret, (err: any, data: any) => {

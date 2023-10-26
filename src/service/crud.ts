@@ -12,10 +12,10 @@ export default {
       throw err;
     }
   },
-  async findById(schema: string, dataId: any, populate: any) {
+  async findById(schema: string, dataId: any, populate?: any,select?:any) {
     try {
       const dataSchema = Model[schema];
-      const data = await dataSchema.findById(dataId).lean();
+      const data = await dataSchema.findById(dataId).populate(populate).select(select).lean();
       // const data = await dataSchema.findOne({ _id: dataId }).populate(populate).lean();
       // data.createdAt = moment(data.createdAt, "X").format("jYYYY/jMM/jDD HH:mm")
       // data.updatedAt = moment(data.updatedAt, "X").format("jYYYY/jMM/jDD HH:mm")

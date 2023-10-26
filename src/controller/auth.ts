@@ -5,6 +5,7 @@ import CRYPTOGRAPHY from './../library/cryptography';
 import Service from '../service/index';
 import validation from '../validator/index';
 import Joi from 'joi';
+import service from '../service/index';
 
 export default {
   async signup(req: Request, res: Response) {
@@ -27,6 +28,12 @@ export default {
         email: data.email,
         role: 'user',
       });
+      const workspace = await Service.CRUD.create('Workspace', {
+        name: data.workspaceName +"-"+ CRYPTOGRAPHY.randomWords(),
+        token: CRYPTOGRAPHY.tokenGenerator(),
+        ownerId: user.id,
+      });
+      await Service.CRUD.updateById('User', { workspaceId: workspace._id }, user._id, [], '');
       return responseBuilder.success(
         res,
         {
@@ -38,7 +45,6 @@ export default {
         'Signup successful! Welcome to our platform. Your account has been created.'
       );
     } catch (err) {
-      console.log('✖ err from catch of controller : ', err);
       console.log(chalk.red('✖ err from catch of controller : '), err);
       return responseBuilder.internalErr(res);
     }

@@ -3,7 +3,6 @@ import joi from 'joi';
 const create = joi.object().keys({
   title: joi.string().required(),
   description: joi.string(),
-  workspaceId: joi.string().required(),
   sourceId: joi.string().required(),
   destinationIds: joi.array().items(joi.string()).required(),
 });

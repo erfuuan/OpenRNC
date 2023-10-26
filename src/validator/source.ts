@@ -3,7 +3,6 @@ const create = joi.object().keys({
   title: joi.string().required(),
   platform: joi.string().required().valid('web', 'flutter', 'android', 'ios'),
   description: joi.string(),
-  workspaceId: joi.string().required(),
 });
 
 const update = joi.object().keys({
