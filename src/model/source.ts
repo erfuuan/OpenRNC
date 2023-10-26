@@ -4,10 +4,12 @@ import moment from 'jalali-moment';
 const sourceSchema = new mongoose.Schema(
   {
     title: { type: String, required: true },
-    platform: { type: String, required: true },
+    platform: { type: String, required: true, enum: ['web', 'flutter', 'android', 'ios'] },
     description: String,
-    sourceToken: { type: String, required: true },
-    sourceLicence: { type: String, required: true },
+    token: { type: String, required: true },
+    licence: { type: String, required: true },
+    // workspaceId: { type: mongoose.Types.ObjectId, ref: 'workspace', required: true },
+    workspaceId: { type:String ,required: true },
     createdAt: {
       type: Number,
       required: true,

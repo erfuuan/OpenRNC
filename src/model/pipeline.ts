@@ -7,13 +7,12 @@ const pipeLineSchema = new mongoose.Schema(
     description: String,
     // sourceId: { type: mongoose.Types.ObjectId, ref: 'Source', required: true },
     sourceId: { type:String,required: true },
-
     // destinationIds: [
     //   { type: mongoose.Types.ObjectId, ref: "destination", required: true },
     // ],
-
+    // workspaceId: { type: mongoose.Types.ObjectId, ref: 'workspace', required: true },
+    workspaceId: { type:String ,required: true },
     destinationIds: [{ type: String, required: true }],
-
     createdAt: {
       type: Number,
       required: true,

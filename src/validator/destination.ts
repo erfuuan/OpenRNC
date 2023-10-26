@@ -2,7 +2,8 @@ import joi from 'joi';
 
 const create = joi.object().keys({
   title: joi.string().required(),
-  platform: joi.string().required(),
+  workspaceId: joi.string().required(),
+  platform: joi.string().required().valid('kafka', 'redis', 'mysql', 'mongo', 'webHooks'),
   description: joi.string(),
   credential: joi.object().required(),
 });

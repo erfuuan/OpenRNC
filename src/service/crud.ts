@@ -54,15 +54,10 @@ export default {
     }
   },
 
-  async find(schema: string, condition: any, populate: any, sort: any, select: any,limit?:number) {
+  async find(schema: string, condition: any, populate?: any, sort?: any, select?: any, limit?: number) {
     try {
       const dataSchema = Model[schema];
-      const data = await dataSchema.find(condition)
-      .populate(populate)
-      .sort(sort).
-      select(select)
-      .limit(limit)
-      .lean();
+      const data = await dataSchema.find(condition).populate(populate).sort(sort).select(select).limit(limit).lean();
       // data.createdAt = moment(data.createdAt, "X").format(
       //   "jYYYY/jMM/jDD HH:mm"
       // );
@@ -120,5 +115,11 @@ export default {
       console.log('err from @delete crudService zone');
       throw err;
     }
+  },
+
+  async collectionCount(schema: string) {
+    const dataSchema = Model[schema];
+    const countQuery = dataSchema.where({}).countDocuments();
+    return countQuery;
   },
 };

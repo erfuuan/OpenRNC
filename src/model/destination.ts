@@ -10,10 +10,8 @@ const destinationSchema = new mongoose.Schema(
       enum: ['redis', 'kafka', 'webHook', 'mysql','mongo'],
     },
     description: String,
-
-    // credential: Object,
-
-
+    workspaceId: { type:String ,required: true },
+    // workspaceId: { type: mongoose.Types.ObjectId, ref: 'workspace', required: true },
     credential: {
       address: String,
       port: String,
@@ -27,7 +25,6 @@ const destinationSchema = new mongoose.Schema(
       method:String
       // required:true
     },
-    
     createdAt: {
       type: Number,
       required: true,

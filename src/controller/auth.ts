@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import responseBuilder from '../library/responseBuilder';
-import  chalk from 'chalk'
+import chalk from 'chalk';
 import CRYPTOGRAPHY from './../library/cryptography';
 import Service from '../service/index';
 import validation from '../validator/index';
@@ -16,7 +16,11 @@ export default {
       const data = await Joi.attempt(result.value, validation.auth);
       const userExist: any = await Service.CRUD.findOneRecord('User', { email: data.email, role: 'user' }, []);
       if (userExist) {
-        return responseBuilder.conflict(res, '', '.کاربری با این ایمیل وارده در سیستم وجود دارد ');
+        return responseBuilder.conflict(
+          res,
+          '',
+          'The entered email is already in use. Please use a different email address or, if you have registered before, use the password recovery option.'
+        );
       }
       const user = await Service.CRUD.create('User', {
         password: CRYPTOGRAPHY.md5(data.password),
@@ -31,11 +35,11 @@ export default {
           username: user.username,
           role: user.role,
         },
-        'حساب کاربری شما با موفقیت ایجاد شد'
+        'Signup successful! Welcome to our platform. Your account has been created.'
       );
     } catch (err) {
       console.log('✖ err from catch of controller : ', err);
-        console.log(chalk.red("✖ err from catch of controller : "),err );
+      console.log(chalk.red('✖ err from catch of controller : '), err);
       return responseBuilder.internalErr(res);
     }
   },
@@ -57,7 +61,7 @@ export default {
         []
       );
       if (!user) {
-        return responseBuilder.notFound(res, '', 'کاربری با این مشخصات در سبستم وجود ندارد');
+        return responseBuilder.notFound(res, '', ' Sorry, no user with these credentials exists in our system.');
       }
       await Service.REDIS.put(user._id, CRYPTOGRAPHY.base64.encode(JSON.stringify(user)));
       const responseData = {

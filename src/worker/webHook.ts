@@ -4,8 +4,8 @@ async function calApi(method: string, url: string, params?: any, headers?: any, 
     const options = {
       method: method,
       url: url,
-      //   headers: headers,
-      //   payload: payload
+        headers: headers,
+        payload: payload
     };
     // console.table(options)
     const response = await axios(options);

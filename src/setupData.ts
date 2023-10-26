@@ -4,7 +4,7 @@ import Service from './service/index';
 export default {
       async createSource() {
         const platform = ['android', 'ios', 'web', 'flutter'];
-        for (let i = 0; i <= 41; i++) {
+        for (let i = 0; i <= 49; i++) {
           await Service.CRUD.create('Source', {
             title: faker.lorem.word(),
             platform: platform[faker.datatype.number({ min: 0, max: 3 })],
@@ -27,7 +27,7 @@ export default {
            url: 'http://localhost:3003/api/v1/test' ,
            method:'GET'
           };
-        for (let i = 0; i <= 41; i++) {
+        for (let i = 0; i <= 49; i++) {
           let randomPlatform = platform[faker.datatype.number({ min: 0, max: 2 })];
           let CredentialData
           // if(randomPlatform=="redis"){CredentialData=redisCredential}

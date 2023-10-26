@@ -3,14 +3,15 @@ import moment from 'jalali-moment';
 
 const consumeSchema = new mongoose.Schema(
   {
-    // title: { type: String, required: true },
+    title: { type: String, required: true },
     // pipelineId: {
     //   type: mongoose.Types.ObjectId,
     //   ref: "Pipeline",
     //   required: true,
     // },
     pipelineId: { type: String, required: true },
-
+    // workspaceId: { type: mongoose.Types.ObjectId, ref: 'workspace', required: true },
+    workspaceId: { type:String ,required: true },
     data: { type: Object, required: true },
     status: {
       type: String,
