@@ -79,7 +79,7 @@ process.on('unhandledRejection', (err: any) => {
   console.log('UNHANDLED REJECTION! 💥');
   // console.log({ message: err.message, stack: err.stack });
   server.close();
-  return createServer();
+  // return createServer();
 });
 
 // Handle uncaughtException errors globally

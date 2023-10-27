@@ -1,3 +1,4 @@
 import auth from './auth';
 import authConsume from './authConsume';
-export default { auth, authConsume };
+import  workspaceOwner from './workspaceOwner'
+export default { auth, authConsume,workspaceOwner };

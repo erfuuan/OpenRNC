@@ -70,7 +70,7 @@ export default {
     }
   },
 
-  async updateById(schema: string, data: any, dataId: any, populate: any, select: any) {
+  async updateById(schema: string, data: any, dataId: any, populate?: any, select?: any) {
     try {
       const dataSchema = Model[schema];
       const updatedData = await dataSchema

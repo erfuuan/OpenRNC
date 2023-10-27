@@ -5,7 +5,6 @@ import CRYPTOGRAPHY from './../library/cryptography';
 import Service from '../service/index';
 import validation from '../validator/index';
 import Joi from 'joi';
-import service from '../service/index';
 
 export default {
   async signup(req: Request, res: Response) {
@@ -14,7 +13,10 @@ export default {
       return responseBuilder.badRequest(res, req.body, result.error.message);
     }
     try {
-      const data = await Joi.attempt(result.value, validation.auth);
+      let data = await Joi.attempt(result.value, validation.auth);
+      if (data.email == data.password) {
+        return responseBuilder.badRequest(res, '', 'email and password doen not same.');
+      }
       const userExist: any = await Service.CRUD.findOneRecord('User', { email: data.email, role: 'user' }, []);
       if (userExist) {
         return responseBuilder.conflict(
@@ -23,13 +25,11 @@ export default {
           'The entered email is already in use. Please use a different email address or, if you have registered before, use the password recovery option.'
         );
       }
-      const user = await Service.CRUD.create('User', {
-        password: CRYPTOGRAPHY.md5(data.password),
-        email: data.email,
-        role: 'user',
-      });
+      data.password = CRYPTOGRAPHY.md5(data.password);
+      data.role = 'user';
+      const user = await Service.CRUD.create('User', data);
       const workspace = await Service.CRUD.create('Workspace', {
-        name: data.workspaceName +"-"+ CRYPTOGRAPHY.randomWords(),
+        name: data.workspaceName + '-' + CRYPTOGRAPHY.randomWords(),
         token: CRYPTOGRAPHY.tokenGenerator(),
         ownerId: user.id,
       });
