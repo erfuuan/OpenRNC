@@ -12,7 +12,7 @@ export default {
       throw err;
     }
   },
-  async findById(schema: string, dataId: any, populate?: any,select?:any) {
+  async findById(schema: string, dataId: any, populate?: any, select?: any) {
     try {
       const dataSchema = Model[schema];
       const data = await dataSchema.findById(dataId).populate(populate).select(select).lean();
@@ -93,7 +93,7 @@ export default {
     }
   },
 
-  async softDelete(schema: string, dataId: any, data: any) {
+  async softDelete(schema: string, dataId: any, data?: any) {
     try {
       const dataSchema = Model[schema];
       await dataSchema.findByIdAndUpdate(dataId, data);

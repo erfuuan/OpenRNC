@@ -1,11 +1,9 @@
 import { Request, Response } from 'express';
 import responseBuilder from '../library/responseBuilder';
 import chalk from 'chalk';
-import CRYPTOGRAPHY from './../library/cryptography';
 import Service from '../service/index';
 import validation from '../validator/index';
 import Joi from 'joi';
-import source from './source';
 
 export default {
   async create(req: Request, res: Response) {
@@ -31,8 +29,63 @@ export default {
       return responseBuilder.internalErr(res);
     }
   },
-  async getAll(req: Request, res: Response) {},
-  async getOne(req: Request, res: Response) {},
-  async put(req: Request, res: Response) {},
-  async delete(req: Request, res: Response) {},
+  async getAll(req: Request, res: Response) {
+    try {
+      const pipelines = await Service.CRUD.find('Pipeline', {}, [], '', '');
+      return responseBuilder.success(res, pipelines, '');
+    } catch (err) {
+      console.log(chalk.red('✖ err from catch of controller : '), err);
+      return responseBuilder.internalErr(res);
+    }
+  },
+  async getOne(req: Request, res: Response) {
+    const result = validation.pipeline.oneRecord.validate(req.params);
+    if (result.error) {
+      return responseBuilder.badRequest(res, req.params, result.error.message);
+    }
+    try {
+      let { id } = await Joi.attempt(result.value, validation.pipeline.oneRecord);
+      const pipeline = await Service.CRUD.findById('Pipeline', id, []);
+      if (!pipeline) {
+        return responseBuilder.notFound(res, '', 'pipeline notFound !');
+      }
+      return responseBuilder.success(res, pipeline, '');
+    } catch (err) {
+      console.log(chalk.red('✖ err from catch of controller : '), err);
+      return responseBuilder.internalErr(res);
+    }
+  },
+
+  async put(req: Request, res: Response) {
+    const result = validation.pipeline.update.validate({ ...req.body, ...req.params });
+    if (result.error) {
+      return responseBuilder.badRequest(res, req.params, result.error.message);
+    }
+    try {
+      let { id, pipeline } = await Joi.attempt(result.value, validation.pipeline.update);
+      const updatedSource = await Service.CRUD.updateById('Pipeline', pipeline, id, [], '');
+      if (!updatedSource) {
+        return responseBuilder.notFound(res, '', 'pipeline notFound!');
+      }
+      return responseBuilder.success(res, updatedSource, '');
+    } catch (err) {
+      console.log(chalk.red('✖ err from catch of controller : '), err);
+      return responseBuilder.internalErr(res);
+    }
+  },
+
+  async delete(req: Request, res: Response) {
+    const result = validation.pipeline.oneRecord.validate(req.params);
+    if (result.error) {
+      return responseBuilder.badRequest(res, req.params, result.error.message);
+    }
+    try {
+      let { id } = await Joi.attempt(result.value, validation.pipeline.oneRecord);
+      await Service.CRUD.softDelete('Pipeline', id);
+      return responseBuilder.success(res, '', 'deleted successfully.');
+    } catch (err) {
+      console.log(chalk.red('✖ err from catch of controller : '), err);
+      return responseBuilder.internalErr(res);
+    }
+  },
 };
