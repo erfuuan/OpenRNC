@@ -1,9 +1,9 @@
-import cache from '../connection/redis';
+import cache from '../connection/index';
 
 export default {
   async put(key: string, value: string, timeout = null) {
     try {
-      await cache.set(key, JSON.stringify(value));
+      await cache.REDIS.set(key, JSON.stringify(value));
       if (timeout) {
         await this.setExpire(key, timeout);
       }
@@ -14,7 +14,7 @@ export default {
 
   async get(key: any) {
     try {
-      const getData: any = await cache.get(key);
+      const getData: any = await cache.REDIS.get(key);
       return JSON.parse(getData);
     } catch (e) {
       console.log(`ERROR_010 => ${e}`);
@@ -23,7 +23,7 @@ export default {
 
   async setExpire(key: string, value: number) {
     try {
-      await cache.expire(key, value);
+      await cache.REDIS.expire(key, value);
     } catch (e) {
       console.log(`ERROR_013 => ${e}`);
     }

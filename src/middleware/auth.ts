@@ -2,8 +2,10 @@ import { Request, Response, NextFunction } from 'express';
 import CRYPTOGRAPHY from '../library/cryptography';
 import Service from '../service/index';
 import responseBuilder from '../library/responseBuilder';
+import IRequest from '../index'
 import jwt from 'jsonwebtoken';
 import appConfig from '../config/application';
+
 const ignoredPath = [
   'POST /api/v1/auth/signup',
   'POST /api/v1/auth/createData',
@@ -13,7 +15,7 @@ const ignoredPath = [
   'POST /api/v1/auth/sendActivationCode',
 ];
 
-export default async (req: any, res: Response, next: NextFunction) => {
+export default async (req: IRequest, res: Response, next: NextFunction) => {
   if (ignoredPath.includes(`${req.method} ${req.originalUrl}`)) {
     return next();
   }

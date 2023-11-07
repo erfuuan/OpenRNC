@@ -4,9 +4,10 @@ import chalk from 'chalk';
 import Service from '../service/index';
 import validation from '../validator/index';
 import Joi from 'joi';
+import IRequest from '../index'
 
 export default {
-  async get(req: any, res: Response) {
+  async get(req: IRequest, res: Response) {
     try {
       const workspace = await Service.CRUD.findById('Workspace', req.userData.workspaceId, [], { ownerId: 0 });
       return responseBuilder.success(res, workspace);
@@ -15,7 +16,7 @@ export default {
       return responseBuilder.internalErr(res);
     }
   },
-  async update(req: any, res: Response) {
+  async update(req: IRequest, res: Response) {
     try {
       const result = validation.workspace.update.validate(req.body);
       if (result.error) {

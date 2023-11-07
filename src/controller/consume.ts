@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import  IRequest  from '../index';
 import responseBuilder from '../library/responseBuilder';
 import  chalk from 'chalk'
 import CRYPTOGRAPHY from './../library/cryptography';
@@ -7,7 +8,7 @@ import validation from '../validator/index';
 
 
 export default {
-  async create(req: any, res: Response) {
+  async create(req: IRequest, res: Response) {
     let data = req.body;
     const consumeData = {
       data: data,

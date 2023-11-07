@@ -2,8 +2,8 @@ import { Request, Response, NextFunction } from 'express';
 import CRYPTOGRAPHY from '../library/cryptography';
 import Service from '../service/index';
 import responseBuilder from '../library/responseBuilder';
-
-export default async (req: any, res: Response, next: NextFunction) => {
+import  IRequest  from '../index';
+export default async (req: IRequest, res: Response, next: NextFunction) => {
   // console.log(new Date());
   const sourceToken = req.headers['authorization'];
   if (!sourceToken) {

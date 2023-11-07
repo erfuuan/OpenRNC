@@ -5,9 +5,11 @@ import CRYPTOGRAPHY from './../library/cryptography';
 import Service from '../service/index';
 import validation from '../validator/index';
 import Joi from 'joi';
+import  IRequest  from '../index';
+
 
 export default {
-  async get(req: any, res: Response) {
+  async get(req: IRequest, res: Response) {
     try {
       const user = await Service.CRUD.findById('User', req.userData._id, [], { password: 0, workspaceId: 0 });
       return responseBuilder.success(res, user);
@@ -16,7 +18,7 @@ export default {
       return responseBuilder.internalErr(res);
     }
   },
-  async update(req: any, res: Response) {
+  async update(req: IRequest, res: Response) {
     try {
       const result = validation.profile.update.validate(req.body);
       if (result.error) {
