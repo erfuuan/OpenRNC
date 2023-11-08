@@ -26,15 +26,17 @@ async function createServer(): Promise<any> {
 }
 
 createServer();
-// setTimeout(() => {
-//   workerV2();
-// }, 4000);
+setTimeout(() => {
+  workerV2();
+}, 4000);
 
 // bootstrap();
 // setup.createSource()
 // setup.createDestination()
 // setup.createPipleine()
 // setup.createConsumeData()
+
+
 
 
 mongoose.connection.on('connecting', function () {
