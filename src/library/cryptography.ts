@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken';
 import md5 from 'md5';
 import appConfig from '../config/application';
-import { nanoid } from 'nanoid';
+// import { nanoid } from 'nanoid';
 import { faker } from '@faker-js/faker';
 
 export default {

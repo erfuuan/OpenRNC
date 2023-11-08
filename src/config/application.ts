@@ -98,6 +98,3 @@ const appConfig = {
 };
 
 export default appConfig[process.env.NODE_ENV || 'production'];
-
-// export appConfig['development']
-// export default appConfig
