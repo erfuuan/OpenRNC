@@ -1,7 +1,6 @@
 import { Request, Response } from 'express';
 import responseBuilder from '../library/responseBuilder';
 import chalk from 'chalk';
-import CRYPTOGRAPHY from './../library/cryptography';
 import Service from '../service/index';
 import validation from '../validator/index';
 import Joi from 'joi';
