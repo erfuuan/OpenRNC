@@ -30,6 +30,7 @@ export default {
       return responseBuilder.internalErr(res);
     }
   },
+  
   async getOne(req: Request, res: Response) {
     const result = validation.destination.oneRecord.validate(req.params);
     if (result.error) {

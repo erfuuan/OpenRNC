@@ -16,6 +16,7 @@ export default {
       return responseBuilder.internalErr(res);
     }
   },
+  
   async update(req: IRequest, res: Response) {
     try {
       const result = validation.workspace.update.validate(req.body);

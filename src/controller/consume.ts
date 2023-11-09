@@ -16,6 +16,7 @@ export default {
 
     return responseBuilder.success(res, '', '');
   },
+  
   async getAll(req: Request, res: Response) {},
   async getOne(req: Request, res: Response) {},
   async put(req: Request, res: Response) {},

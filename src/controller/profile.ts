@@ -6,7 +6,6 @@ import validation from '../validator/index';
 import Joi from 'joi';
 import IRequest  from '../index';
 
-
 export default {
   async get(req: IRequest, res: Response) {
     try {
@@ -17,6 +16,7 @@ export default {
       return responseBuilder.internalErr(res);
     }
   },
+
   async update(req: IRequest, res: Response) {
     try {
       const result = validation.profile.update.validate(req.body);

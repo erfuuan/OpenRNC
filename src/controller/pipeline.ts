@@ -13,7 +13,6 @@ export default {
     }
     try {
       let data = await Joi.attempt(result.value, validation.pipeline.create);
-
       const sourceExist = await Service.CRUD.findById('Source', data.sourceId, []);
       if (!sourceExist) {
         return responseBuilder.notFound(res, '', 'source is not exist !');
@@ -29,6 +28,7 @@ export default {
       return responseBuilder.internalErr(res);
     }
   },
+
   async getAll(req: Request, res: Response) {
     try {
       const pipelines = await Service.CRUD.find('Pipeline', {}, [], '', '');
@@ -38,6 +38,7 @@ export default {
       return responseBuilder.internalErr(res);
     }
   },
+  
   async getOne(req: Request, res: Response) {
     const result = validation.pipeline.oneRecord.validate(req.params);
     if (result.error) {

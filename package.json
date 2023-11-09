@@ -30,6 +30,7 @@
     "jalali-moment": "^3.3.11",
     "joi": "^17.11.0",
     "jsonwebtoken": "^9.0.2",
+    "kafkajs": "^2.2.4",
     "md5": "^2.3.0",
     "mongoose": "^7.6.3",
     "morgan": "^1.10.0",
