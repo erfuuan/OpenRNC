@@ -1,11 +1,13 @@
 import mongoose from 'mongoose';
 import moment from 'jalali-moment';
 
+enum Role{ADMIN= 'ADMIN',USER= 'USER'}
+
 interface IUser {
 	email: string;
 	password: string;
 	jobTitle: string;
-	role: string;
+	role :string;
 	workspaceId: string;
 	createdAt: Date;
 	updatedAt: Date;

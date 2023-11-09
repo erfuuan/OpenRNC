@@ -19,7 +19,7 @@ async function createServer(): Promise<any> {
   if (DBconnectionSuccessfully) {
     server = http.createServer(app);
     return server.listen(port, () => {
-      console.log(chalk.green.underline('✔ [success] server listen to', port, new Date(),'💥'));
+      console.log(chalk.green.underline('✔ [success] server listen to', port, new Date(),'💥 ✨'));
     });
   } else {
     server.close();
@@ -65,13 +65,14 @@ const setupServer = (isClusterRequired) => {
   } else {
       // to setup server configurations and share port address for incoming requests
       createServer();
-      workerV2();
+      // workerV2();
   }
 };
 
+createServer()
 //?==========================
 
-setupServer(true)
+// setupServer(true)
 // setTimeout(() => {
 //   setupServer(true);
 // }, 4000);
